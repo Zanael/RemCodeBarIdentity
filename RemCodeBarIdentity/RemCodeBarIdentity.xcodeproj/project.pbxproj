@@ -86,6 +86,9 @@
 		7B8977EE1F1FD8EE003A9079 /* REMMergedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8977ED1F1FD8EE003A9079 /* REMMergedCell.m */; };
 		7B8977F91F1FF58A003A9079 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8977F81F1FF58A003A9079 /* TableViewCell.m */; };
 		7B8978011F1FF603003A9079 /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8978001F1FF603003A9079 /* DetailsTableViewController.m */; };
+		7B8978041F1FFD8D003A9079 /* ServerFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8978031F1FFD8D003A9079 /* ServerFileModel.m */; };
+		7B8978061F200135003A9079 /* libEasyMapping.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B8978051F200135003A9079 /* libEasyMapping.a */; };
+		7B8978081F20013C003A9079 /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B8978071F20013C003A9079 /* libAFNetworking.a */; };
 		C3D5BDAB0D62772495A2859D /* libPods-RemCodeBarIdentity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41355FE0E8306AC03975C058 /* libPods-RemCodeBarIdentity.a */; };
 /* End PBXBuildFile section */
 
@@ -293,6 +296,10 @@
 		7B8977F81F1FF58A003A9079 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		7B8977FF1F1FF603003A9079 /* DetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsTableViewController.h; sourceTree = "<group>"; };
 		7B8978001F1FF603003A9079 /* DetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsTableViewController.m; sourceTree = "<group>"; };
+		7B8978021F1FFD8D003A9079 /* ServerFileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerFileModel.h; sourceTree = "<group>"; };
+		7B8978031F1FFD8D003A9079 /* ServerFileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerFileModel.m; sourceTree = "<group>"; };
+		7B8978051F200135003A9079 /* libEasyMapping.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEasyMapping.a; path = "../../../Library/Developer/Xcode/DerivedData/RemCodeBarIdentity-dupjfsoyhxhetacovhczqawymbsu/Build/Products/Debug-iphonesimulator/EasyMapping/libEasyMapping.a"; sourceTree = "<group>"; };
+		7B8978071F20013C003A9079 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "../../../Library/Developer/Xcode/DerivedData/RemCodeBarIdentity-dupjfsoyhxhetacovhczqawymbsu/Build/Products/Debug-iphonesimulator/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
 		FD6E3370D906628662CB363D /* Pods-RemCodeBarIdentity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemCodeBarIdentity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RemCodeBarIdentity/Pods-RemCodeBarIdentity.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -301,6 +308,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B8978081F20013C003A9079 /* libAFNetworking.a in Frameworks */,
+				7B8978061F200135003A9079 /* libEasyMapping.a in Frameworks */,
 				7B8974E61F1FBCF2003A9079 /* libz.tbd in Frameworks */,
 				7B89736B1F1F859A003A9079 /* libiconv.tbd in Frameworks */,
 				7B8973691F1F8583003A9079 /* QuartzCore.framework in Frameworks */,
@@ -361,6 +370,8 @@
 				7B8977EA1F1FD8D8003A9079 /* REMCell.m */,
 				7B8977EC1F1FD8EE003A9079 /* REMMergedCell.h */,
 				7B8977ED1F1FD8EE003A9079 /* REMMergedCell.m */,
+				7B8978021F1FFD8D003A9079 /* ServerFileModel.h */,
+				7B8978031F1FFD8D003A9079 /* ServerFileModel.m */,
 				7B8977201F1FCA36003A9079 /* XlsxReaderWriter */,
 				7B8973BA1F1F8EC2003A9079 /* ZBarSDK */,
 				7B8973271F1F82F0003A9079 /* Supporting Files */,
@@ -380,6 +391,8 @@
 		7B8973611F1F855F003A9079 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B8978071F20013C003A9079 /* libAFNetworking.a */,
+				7B8978051F200135003A9079 /* libEasyMapping.a */,
 				7B8976921F1FC580003A9079 /* XlsxReaderWriter.xcodeproj */,
 				7B8975FD1F1FC2C5003A9079 /* XCTest.framework */,
 				7B8974E51F1FBCF2003A9079 /* libz.tbd */,
@@ -854,6 +867,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B8978041F1FFD8D003A9079 /* ServerFileModel.m in Sources */,
 				7B8977CA1F1FCA37003A9079 /* NativeFont+BoldItalic.m in Sources */,
 				7B8977A01F1FCA37003A9079 /* unzip.c in Sources */,
 				7B8977C61F1FCA37003A9079 /* BRAWorksheet.m in Sources */,

@@ -79,6 +79,57 @@
     NSLog(@"");
 }
 
+- (IBAction)reloadFile:(id)sender {
+    
+    // Request
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    NSString *urlString = @"http://nlmkdev.westeurope.cloudapp.azure.com/api/Files";
+    NSURL *serverURL = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:serverURL.absoluteString parameters:nil error:nil];
+    
+    __block ServerFileModel *result = nil;
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        
+        NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
+
+        if (error) {
+            NSLog(@"");
+        } else {
+            NSArray *files = (NSArray*)responseObject;
+            result = [EKMapper objectFromExternalRepresentation:files.firstObject withMapping:[ServerFileModel objectMapping]];
+            
+            // Download file
+            
+            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+            AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+            
+            NSString *urlString = [result.fileURL stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
+            NSURL *URL = [NSURL URLWithString:urlString];
+            NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+            
+            NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+                NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+                //return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+                return [documentsDirectoryURL URLByAppendingPathComponent:@"input.xlsx"];
+            } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                NSLog(@"File downloaded to: %@", filePath);
+            }];
+            [downloadTask resume];
+            
+            NSLog(@"");
+        }
+        
+        //completionHandler(result, response, responseObject, error);
+    }];
+    
+    [dataTask resume];
+}
+
 - (IBAction)scanButtonTapped:(id)sender {
     
 //    ZBarReaderViewController *reader = [ZBarReaderViewController new];
@@ -90,7 +141,6 @@
 //    [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
 //    
 //    [self presentViewController:reader animated:YES completion:nil];
-    
     
     [self performSegueWithIdentifier:@"details" sender:self];
 }

@@ -12,6 +12,9 @@
 #import "REMMergedCell.h"
 #import "REMCell.h"
 #import "DetailsTableViewController.h"
+#import "AFNetworking.h"
+#import "EasyMapping.h"
+#import "ServerFileModel.h"
 
 @interface ViewController : UIViewController <ZBarReaderDelegate>
 

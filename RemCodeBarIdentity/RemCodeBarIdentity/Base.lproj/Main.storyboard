@@ -22,34 +22,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApX-p1-5us">
-                                <rect key="frame" x="20" y="159" width="335" height="30"/>
+                                <rect key="frame" x="20" y="167" width="335" height="30"/>
                                 <state key="normal" title="Сканировать"/>
                                 <connections>
                                     <action selector="scanButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CZd-o7-lM2"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="821-ph-8ki">
-                                <rect key="frame" x="16" y="93" width="343" height="30"/>
+                                <rect key="frame" x="16" y="101" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Номер партии:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VaX-c8-2db">
-                                <rect key="frame" x="16" y="64" width="343" height="21"/>
+                                <rect key="frame" x="16" y="72" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TC-zg-JF2">
+                                <rect key="frame" x="16" y="617" width="343" height="30"/>
+                                <state key="normal" title="Обновить файл"/>
+                                <connections>
+                                    <action selector="reloadFile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="05t-wG-mu0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="821-ph-8ki" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="9PA-as-C70"/>
                             <constraint firstItem="821-ph-8ki" firstAttribute="top" secondItem="VaX-c8-2db" secondAttribute="bottom" constant="8" id="BNi-F1-Ypr"/>
-                            <constraint firstItem="VaX-c8-2db" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="CKg-C8-EBC"/>
+                            <constraint firstItem="VaX-c8-2db" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="CKg-C8-EBC"/>
                             <constraint firstItem="VaX-c8-2db" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="Dy2-h0-SbB"/>
                             <constraint firstAttribute="trailing" secondItem="821-ph-8ki" secondAttribute="trailing" constant="16" id="EAp-EK-yKI"/>
                             <constraint firstAttribute="trailing" secondItem="VaX-c8-2db" secondAttribute="trailing" constant="16" id="GRb-Ko-CZz"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="7TC-zg-JF2" secondAttribute="bottom" constant="20" id="MR9-7L-GUl"/>
+                            <constraint firstAttribute="trailing" secondItem="7TC-zg-JF2" secondAttribute="trailing" constant="16" id="WVw-1d-cYI"/>
                             <constraint firstItem="ApX-p1-5us" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="YXz-0h-i8w"/>
+                            <constraint firstItem="7TC-zg-JF2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="gZy-IW-aEs"/>
                             <constraint firstAttribute="trailing" secondItem="ApX-p1-5us" secondAttribute="trailing" constant="20" id="rbB-B6-VFP"/>
                             <constraint firstItem="ApX-p1-5us" firstAttribute="top" secondItem="821-ph-8ki" secondAttribute="bottom" constant="36" id="zxt-Rb-ehs"/>
                         </constraints>
