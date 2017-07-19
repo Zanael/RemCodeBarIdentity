@@ -84,6 +84,8 @@
 		7B8977DE1F1FCB76003A9079 /* input.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 7B8977DD1F1FCB71003A9079 /* input.xlsx */; };
 		7B8977EB1F1FD8D8003A9079 /* REMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8977EA1F1FD8D8003A9079 /* REMCell.m */; };
 		7B8977EE1F1FD8EE003A9079 /* REMMergedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8977ED1F1FD8EE003A9079 /* REMMergedCell.m */; };
+		7B8977F91F1FF58A003A9079 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8977F81F1FF58A003A9079 /* TableViewCell.m */; };
+		7B8978011F1FF603003A9079 /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8978001F1FF603003A9079 /* DetailsTableViewController.m */; };
 		C3D5BDAB0D62772495A2859D /* libPods-RemCodeBarIdentity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41355FE0E8306AC03975C058 /* libPods-RemCodeBarIdentity.a */; };
 /* End PBXBuildFile section */
 
@@ -287,6 +289,10 @@
 		7B8977EA1F1FD8D8003A9079 /* REMCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCell.m; sourceTree = "<group>"; };
 		7B8977EC1F1FD8EE003A9079 /* REMMergedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMergedCell.h; sourceTree = "<group>"; };
 		7B8977ED1F1FD8EE003A9079 /* REMMergedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMMergedCell.m; sourceTree = "<group>"; };
+		7B8977F71F1FF58A003A9079 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		7B8977F81F1FF58A003A9079 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		7B8977FF1F1FF603003A9079 /* DetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsTableViewController.h; sourceTree = "<group>"; };
+		7B8978001F1FF603003A9079 /* DetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsTableViewController.m; sourceTree = "<group>"; };
 		FD6E3370D906628662CB363D /* Pods-RemCodeBarIdentity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemCodeBarIdentity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RemCodeBarIdentity/Pods-RemCodeBarIdentity.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -343,6 +349,10 @@
 				7B89732B1F1F82F0003A9079 /* AppDelegate.m */,
 				7B89732D1F1F82F0003A9079 /* ViewController.h */,
 				7B89732E1F1F82F0003A9079 /* ViewController.m */,
+				7B8977FF1F1FF603003A9079 /* DetailsTableViewController.h */,
+				7B8978001F1FF603003A9079 /* DetailsTableViewController.m */,
+				7B8977F71F1FF58A003A9079 /* TableViewCell.h */,
+				7B8977F81F1FF58A003A9079 /* TableViewCell.m */,
 				7B8973301F1F82F0003A9079 /* Main.storyboard */,
 				7B8973331F1F82F0003A9079 /* Assets.xcassets */,
 				7B8973351F1F82F0003A9079 /* LaunchScreen.storyboard */,
@@ -896,7 +906,9 @@
 				7B8977BF1F1FCA37003A9079 /* BRARow.m in Sources */,
 				7B8977B71F1FCA37003A9079 /* BRAMergeCell.m in Sources */,
 				7B8977A21F1FCA37003A9079 /* SSZipArchive.m in Sources */,
+				7B8978011F1FF603003A9079 /* DetailsTableViewController.m in Sources */,
 				7B8977BD1F1FCA37003A9079 /* BRARelationship.m in Sources */,
+				7B8977F91F1FF58A003A9079 /* TableViewCell.m in Sources */,
 				7B8977C71F1FCA37003A9079 /* BRAWorksheetDrawing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

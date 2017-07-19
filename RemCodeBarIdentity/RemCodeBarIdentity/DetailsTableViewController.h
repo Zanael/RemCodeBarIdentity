@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DetailsTableViewController.h
 //  RemCodeBarIdentity
 //
 //  Created by Alexander Devin on 19/07/2017.
@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZBarSDK.h"
-#import "BRAOfficeDocumentPackage.h"
+#import "TableViewCell.h"
 #import "REMMergedCell.h"
 #import "REMCell.h"
-#import "DetailsTableViewController.h"
 
-@interface ViewController : UIViewController <ZBarReaderDelegate>
+@interface DetailsTableViewController : UITableViewController
 
+@property (nonatomic, strong) NSMutableArray<REMMergedCell*> *mergedCells;
 
 @end
-

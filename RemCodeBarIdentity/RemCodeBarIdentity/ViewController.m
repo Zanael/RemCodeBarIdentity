@@ -11,6 +11,7 @@
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *resultText;
+@property (strong, nonatomic) NSMutableArray<REMMergedCell*> *mergedCells;
 
 @end
 
@@ -39,19 +40,19 @@
     BRARow *firstRow = firstWorksheet.rows[0];
     BRARow *secondRow = firstWorksheet.rows[1];
     BRARow *searchedRow = firstWorksheet.rows[searchedIndex];
-    NSMutableArray<REMMergedCell*> *mergedCells = [NSMutableArray<REMMergedCell*> new];
+    self.mergedCells = [NSMutableArray<REMMergedCell*> new];
     int currentIndex = 1;
     for (BRACell *cell in firstRow.cells) {
         if (cell.mergeCell != nil) {
             if (cell.mergeCell.leffColumnIndex == currentIndex) {
                 REMMergedCell *mergedCell = [REMMergedCell new];
                 mergedCell.title = cell.stringValue;
-                [mergedCells addObject:mergedCell];
+                [self.mergedCells addObject:mergedCell];
             }
         } else {
             REMMergedCell *mergedCell = [REMMergedCell new];
             mergedCell.title = cell.stringValue;
-            [mergedCells addObject:mergedCell];
+            [self.mergedCells addObject:mergedCell];
         }
         
         REMCell *remCell = [REMCell new];
@@ -70,7 +71,7 @@
             }
         }
         
-        [[mergedCells lastObject].cells addObject:remCell];
+        [[self.mergedCells lastObject].cells addObject:remCell];
         
         currentIndex++;
     }
@@ -80,16 +81,18 @@
 
 - (IBAction)scanButtonTapped:(id)sender {
     
-    ZBarReaderViewController *reader = [ZBarReaderViewController new];
-    reader.readerDelegate = self;
-    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
+//    ZBarReaderViewController *reader = [ZBarReaderViewController new];
+//    reader.readerDelegate = self;
+//    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
+//    
+//    ZBarImageScanner *scanner = reader.scanner;
+//    
+//    [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
+//    
+//    [self presentViewController:reader animated:YES completion:nil];
     
-    ZBarImageScanner *scanner = reader.scanner;
     
-    [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
-    [self presentViewController:reader animated:YES completion:nil];
-    
-    NSLog(@"TBD: scan barcode here...");
+    [self performSegueWithIdentifier:@"details" sender:self];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
@@ -101,6 +104,13 @@
     self.resultText.text = symbol.data;
     
     [picker dismissViewControllerAnimated:true completion:nil];
+    
+    [self performSegueWithIdentifier:@"details" sender:self];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    DetailsTableViewController *vc = segue.destinationViewController;
+    vc.mergedCells = self.mergedCells;
 }
 
 @end
