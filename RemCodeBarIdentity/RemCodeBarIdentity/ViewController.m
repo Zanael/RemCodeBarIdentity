@@ -19,64 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSString *documentPath = [[NSBundle mainBundle] pathForResource:@"input" ofType:@"xlsx"];
-    BRAOfficeDocumentPackage *spreadSheet = [BRAOfficeDocumentPackage open:documentPath];
-    
-    BRAWorksheet *firstWorksheet = spreadSheet.workbook.worksheets[0];
-    
-    // Search
-    long searchedIndex = -1;
-    for (int i = 2; i < firstWorksheet.rows.count; i++) {
-        BRARow *row = firstWorksheet.rows[i];
-        BRACell *cell = row.cells[1];
-        if ([cell.stringValue isEqualToString:@"40CLK5H116"]) {
-            searchedIndex = row.rowIndex - 1;
-            NSLog(@"rowIndex: %ld", (long)row.rowIndex - 1);
-            break;
-        }
-    }
-    
-    BRARow *firstRow = firstWorksheet.rows[0];
-    BRARow *secondRow = firstWorksheet.rows[1];
-    BRARow *searchedRow = firstWorksheet.rows[searchedIndex];
-    self.mergedCells = [NSMutableArray<REMMergedCell*> new];
-    int currentIndex = 1;
-    for (BRACell *cell in firstRow.cells) {
-        if (cell.mergeCell != nil) {
-            if (cell.mergeCell.leffColumnIndex == currentIndex) {
-                REMMergedCell *mergedCell = [REMMergedCell new];
-                mergedCell.title = cell.stringValue;
-                [self.mergedCells addObject:mergedCell];
-            }
-        } else {
-            REMMergedCell *mergedCell = [REMMergedCell new];
-            mergedCell.title = cell.stringValue;
-            [self.mergedCells addObject:mergedCell];
-        }
-        
-        REMCell *remCell = [REMCell new];
-        remCell.title = @"";
-        for (BRACell *subCell in secondRow.cells) {
-            if (subCell.columnIndex == currentIndex) {
-                remCell.title = subCell.stringValue;
-                break;
-            }
-        }
-        remCell.content = @"";
-        for (BRACell *subCell in searchedRow.cells) {
-            if (subCell.columnIndex == currentIndex) {
-                remCell.content = subCell.stringValue;
-                break;
-            }
-        }
-        
-        [[self.mergedCells lastObject].cells addObject:remCell];
-        
-        currentIndex++;
-    }
-    
-    NSLog(@"");
 }
 
 - (IBAction)reloadFile:(id)sender {
@@ -98,6 +40,11 @@
         NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
 
         if (error) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Загрузка файла" message:@"Ошибка" preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //
+            }]];
+            [self presentViewController:alert animated:YES completion:nil];
             NSLog(@"");
         } else {
             NSArray *files = (NSArray*)responseObject;
@@ -118,13 +65,18 @@
                 return [documentsDirectoryURL URLByAppendingPathComponent:@"input.xlsx"];
             } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
                 NSLog(@"File downloaded to: %@", filePath);
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Загрузка файла" message:@"Успешно" preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    //
+                }]];
+                [self presentViewController:alert animated:YES completion:nil];
+                
             }];
             [downloadTask resume];
             
             NSLog(@"");
         }
-        
-        //completionHandler(result, response, responseObject, error);
     }];
     
     [dataTask resume];
@@ -132,17 +84,15 @@
 
 - (IBAction)scanButtonTapped:(id)sender {
     
-//    ZBarReaderViewController *reader = [ZBarReaderViewController new];
-//    reader.readerDelegate = self;
-//    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
-//    
-//    ZBarImageScanner *scanner = reader.scanner;
-//    
-//    [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
-//    
-//    [self presentViewController:reader animated:YES completion:nil];
+    ZBarReaderViewController *reader = [ZBarReaderViewController new];
+    reader.readerDelegate = self;
+    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
     
-    [self performSegueWithIdentifier:@"details" sender:self];
+    ZBarImageScanner *scanner = reader.scanner;
+    
+    [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
+    
+    [self presentViewController:reader animated:YES completion:nil];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
@@ -153,9 +103,78 @@
     }
     self.resultText.text = symbol.data;
     
-    [picker dismissViewControllerAnimated:true completion:nil];
+    //
+    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+    NSURL *fileURL = [documentsDirectoryURL URLByAppendingPathComponent:@"input.xlsx"];
+    NSString *path = [fileURL.absoluteString stringByReplacingOccurrencesOfString:@"file://" withString:@""];
     
-    [self performSegueWithIdentifier:@"details" sender:self];
+    //NSString *documentPath = [[NSBundle mainBundle] pathForResource:@"input" ofType:@"xlsx"];
+    //BRAOfficeDocumentPackage *spreadSheet = [BRAOfficeDocumentPackage open:documentPath];
+    
+    BRAOfficeDocumentPackage *spreadSheet = [BRAOfficeDocumentPackage open:path];
+    
+    if (spreadSheet != nil) {
+        BRAWorksheet *firstWorksheet = spreadSheet.workbook.worksheets[0];
+        
+        // Search
+        long searchedIndex = -1;
+        for (int i = 2; i < firstWorksheet.rows.count; i++) {
+            BRARow *row = firstWorksheet.rows[i];
+            BRACell *cell = row.cells[1];
+            if ([cell.stringValue isEqualToString:symbol.data]) {
+                searchedIndex = row.rowIndex - 1;
+                NSLog(@"rowIndex: %ld", (long)row.rowIndex - 1);
+                break;
+            }
+        }
+        
+        BRARow *firstRow = firstWorksheet.rows[0];
+        BRARow *secondRow = firstWorksheet.rows[1];
+        BRARow *searchedRow = firstWorksheet.rows[searchedIndex];
+        self.mergedCells = [NSMutableArray<REMMergedCell*> new];
+        int currentIndex = 1;
+        for (BRACell *cell in firstRow.cells) {
+            if (cell.mergeCell != nil) {
+                if (cell.mergeCell.leffColumnIndex == currentIndex) {
+                    REMMergedCell *mergedCell = [REMMergedCell new];
+                    mergedCell.title = cell.stringValue;
+                    [self.mergedCells addObject:mergedCell];
+                }
+            } else {
+                REMMergedCell *mergedCell = [REMMergedCell new];
+                mergedCell.title = cell.stringValue;
+                [self.mergedCells addObject:mergedCell];
+            }
+            
+            REMCell *remCell = [REMCell new];
+            remCell.title = @"";
+            for (BRACell *subCell in secondRow.cells) {
+                if (subCell.columnIndex == currentIndex) {
+                    remCell.title = subCell.stringValue;
+                    break;
+                }
+            }
+            remCell.content = @"";
+            for (BRACell *subCell in searchedRow.cells) {
+                if (subCell.columnIndex == currentIndex) {
+                    remCell.content = subCell.stringValue;
+                    break;
+                }
+            }
+            
+            [[self.mergedCells lastObject].cells addObject:remCell];
+            
+            currentIndex++;
+        }
+        
+        NSLog(@"");
+    }
+    
+    //
+    
+    [picker dismissViewControllerAnimated:true completion:^{
+        [self performSegueWithIdentifier:@"details" sender:self];
+    }];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
